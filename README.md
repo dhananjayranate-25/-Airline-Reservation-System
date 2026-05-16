@@ -27,27 +27,7 @@ A complete airline reservation system built with Python Flask, SQLite, and moder
 
 ## Project Structure
 
-📦 skybook-airline-reservation
-├── 📄 server.py                  # Flask web server (main application)
-├── 📄 airline_reservation.py     # Tkinter desktop GUI (legacy)
-├── 📄 airline_reservation.db     # SQLite database (auto-populated)
-│
-├── 📁 templates/
-│   ├── 📄 home.html              # Landing page with hero section
-│   ├── 📄 index.html             # Main booking interface
-│   └── 📄 admin.html             # Admin dashboard
-│
-├── 📁 static/
-│   ├── 📄 home.css               # Landing page styles
-│   ├── 📄 home.js                # Landing page interactions
-│   ├── 📄 style.css              # Main app styles
-│   └── 📄 app.js                 # Main app logic
-│
-├── 📄 SPEC.md                    # Project specifications
-├── 📄 PROJECT_DOCUMENTATION.txt  # Detailed project documentation
-├── 📄 PSEUDOCODE.txt             # Pseudocode for algorithms
-├── 📄 TEST_CASES.txt             # Test cases
-└── 📄 README.md                  # This file
+<img width="696" height="501" alt="image" src="https://github.com/user-attachments/assets/b347b0e2-9554-497e-b7d5-853bc0d03754" />
 
 ## Installation
 
