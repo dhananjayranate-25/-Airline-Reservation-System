@@ -212,15 +212,6 @@ python airline_reservation.py
 5. Open a Pull Request
 
 ---
-
-## License
-
-This project is for **educational purposes only**.
-
----
-
-<div align="center">
-
-Made with Dhananjay 
+Made with Dhananjay Ranate
 
 </div>
