@@ -1,6 +1,23 @@
-# Airline-Reservation-System
+<div align="center">
 
-A complete airline reservation system built with Python Flask, SQLite, and modern web technologies. Features both a web interface and a legacy Tkinter desktop GUI.
+# ✈️ SkyBook - Airline Reservation System
+
+![Python](https://img.shields.io/badge/Python-3.8%2B-blue?logo=python)
+![Flask](https://img.shields.io/badge/Flask-2.3%2B-black?logo=flask)
+![SQLite](https://img.shields.io/badge/SQLite-003B57?logo=sqlite)
+![HTML5](https://img.shields.io/badge/HTML5-E34F26?logo=html5)
+![CSS3](https://img.shields.io/badge/CSS3-1572B6?logo=css3)
+![JavaScript](https://img.shields.io/badge/JavaScript-ES6%2B-F7DF1E?logo=javascript)
+![Tkinter](https://img.shields.io/badge/Tkinter-GUI-green)
+![License](https://img.shields.io/badge/License-MIT-yellow)
+
+**A complete airline reservation system built with Python Flask, SQLite, and modern web technologies. Features both a web interface and a legacy Tkinter desktop GUI.**
+
+[🚀 Features](#features) • [🛠️ Tech Stack](#tech-stack) • [📦 Installation](#installation) • [📖 Usage](#usage) • [🌐 API Endpoints](#api-endpoints)
+
+</div>
+
+---
 
 ## Features
 
@@ -16,6 +33,8 @@ A complete airline reservation system built with Python Flask, SQLite, and moder
 | 🏙️ **20 Indian Cities** | Flights across major Indian metro and tier-2 cities |
 | 🖥️ **Desktop GUI** | Legacy Tkinter-based desktop application |
 
+---
+
 ## Tech Stack
 
 | Layer | Technology |
@@ -25,9 +44,47 @@ A complete airline reservation system built with Python Flask, SQLite, and moder
 | **Desktop** | Python, Tkinter |
 | **Styling** | Font Awesome, Google Fonts (Outfit, Playfair Display) |
 
+---
+
+## Screenshots
+
+> *(Add screenshots here)*
+>
+> | Home Page | Booking Interface | Admin Dashboard |
+> |:---:|:---:|:---:|
+> | `home.png` | `booking.png` | `admin.png` |
+> | Desktop GUI | Seat Map | PNR Lookup |
+> | `desktop.png` | `seats.png` | `pnr.png` |
+
+---
+
 ## Project Structure
 
-<img width="696" height="501" alt="image" src="https://github.com/user-attachments/assets/b347b0e2-9554-497e-b7d5-853bc0d03754" />
+```
+📦 skybook-airline-reservation
+├── 📄 server.py                  # Flask web server (main application)
+├── 📄 airline_reservation.py     # Tkinter desktop GUI (legacy)
+├── 📄 airline_reservation.db     # SQLite database (auto-populated)
+│
+├── 📁 templates/
+│   ├── 📄 home.html              # Landing page with hero section
+│   ├── 📄 index.html             # Main booking interface
+│   └── 📄 admin.html             # Admin dashboard
+│
+├── 📁 static/
+│   ├── 📄 home.css               # Landing page styles
+│   ├── 📄 home.js                # Landing page interactions
+│   ├── 📄 style.css              # Main app styles
+│   └── 📄 app.js                 # Main app logic
+│
+├── 📄 SPEC.md                    # Project specifications
+├── 📄 PROJECT_DOCUMENTATION.txt  # Detailed project documentation
+├── 📄 PSEUDOCODE.txt             # Pseudocode for algorithms
+├── 📄 TEST_CASES.txt             # Test cases
+└── 📄 README.md                  # This file
+```
+
+---
 
 ## Installation
 
@@ -61,6 +118,8 @@ A complete airline reservation system built with Python Flask, SQLite, and moder
 
 > 💡 The database (`airline_reservation.db`) is included. Flights are auto-populated on first run.
 
+---
+
 ## Usage
 
 ### Web Interface
@@ -77,10 +136,15 @@ A complete airline reservation system built with Python Flask, SQLite, and moder
 ```bash
 python airline_reservation.py
 ```
+
+---
+
 ## Admin Access
 
 - Navigate to **`http://127.0.0.1:5000/admin`**
 - Login credentials are stored in the `admin` table in the database
+
+---
 
 ## API Endpoints
 
@@ -102,7 +166,6 @@ python airline_reservation.py
 ## Database Schema
 
 ### flights
-
 | Column | Type | Description |
 |--------|------|-------------|
 | `flight_id` | INTEGER (PK) | Auto-increment ID |
@@ -117,7 +180,6 @@ python airline_reservation.py
 | `aircraft` | TEXT | Aircraft type |
 
 ### bookings
-
 | Column | Type | Description |
 |--------|------|-------------|
 | `pnr` | TEXT (PK) | Unique PNR number |
@@ -133,13 +195,13 @@ python airline_reservation.py
 | `total_amount` | REAL | Total fare |
 
 ### admin
-
 | Column | Type | Description |
 |--------|------|-------------|
 | `id` | INTEGER (PK) | Admin ID |
 | `username` | TEXT | Admin username |
 | `password` | TEXT | Admin password |
 
+---
 
 ## Contributing
 
@@ -149,3 +211,16 @@ python airline_reservation.py
 4. Push to the branch (`git push origin feature/amazing-feature`)
 5. Open a Pull Request
 
+---
+
+## License
+
+This project is for **educational purposes only**.
+
+---
+
+<div align="center">
+
+Made with Dhananjay 
+
+</div>
