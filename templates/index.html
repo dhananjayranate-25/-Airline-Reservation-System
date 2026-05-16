@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkyBook - Airline Reservation System</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+<nav class="navbar">
+        <div class="nav-brand">
+            <div class="logo">
+                <i class="fas fa-plane-departure"></i>
+            </div>
+            <div class="brand-text">
+                <span class="brand-name">SkyBook</span>
+                <span class="brand-tagline">Premium Airlines</span>
+            </div>
+        </div>
+        
+        <!-- Top Section - Search & User -->
+        <div class="panel-top">
+            
+            <div class="user-section-top">
+                <div class="user-info" id="userInfo" style="display: none;" onclick="showAccountDetails(); event.stopPropagation();">
+                    <div class="user-avatar">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="user-details">
+                        <span class="user-name" id="userName">User</span>
+                        <span class="user-id" id="userIdDisplay"></span>
+                    </div>
+                    <button class="delete-btn" onclick="deleteAccount(); event.stopPropagation();" title="Delete Account">
+                        <i class="fas fa-trash-alt"></i>
+                    </button>
+                    <button class="logout-btn" onclick="logout(); event.stopPropagation();">
+                        <i class="fas fa-sign-out-alt"></i>
+                    </button>
+                </div>
+                <button class="login-btn-top" id="loginBtn" onclick="showLoginModal()">
+                    <i class="fas fa-sign-in-alt"></i> Login
+                </button>
+            </div>
+            
+            <div class="db-status">
+                <span class="status-dot"></span>
+                <span>Database Connected</span>
+            </div>
+        </div>
+        
+        <ul class="nav-menu">
+            <li class="nav-item active" data-tab="search">
+                <i class="fas fa-search"></i>
+                <span>Search Flights</span>
+            </li>
+            <li class="nav-item" data-tab="cost">
+                <i class="fas fa-calculator"></i>
+                <span>Total Cost</span>
+            </li>
+            <li class="nav-item" data-tab="booking">
+                <i class="fas fa-ticket-alt"></i>
+                <span>Book Ticket</span>
+            </li>
+            <li class="nav-item" data-tab="seat">
+                <i class="fas fa-chair"></i>
+                <span>Seat Allocation</span>
+            </li>
+            <li class="nav-item" data-tab="cancel">
+                <i class="fas fa-times-circle"></i>
+                <span>Cancellation</span>
+            </li>
+        </ul>
+    </nav>
+
+    <main class="main-content">
+        <!-- Search Flights Tab -->
+        <section class="tab-content active" id="search">
+            <div class="page-header">
+                <h1><i class="fas fa-search"></i> Search Flights</h1>
+                <p>Find the perfect flight for your journey</p>
+            </div>
+            <div class="content-grid">
+                <div class="card search-form-card">
+                    <div class="card-header">
+                        <h2>Flight Details</h2>
+                    </div>
+                    <div class="card-body">
+                        <form id="searchForm">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label><i class="fas fa-plane-departure"></i> From</label>
+                                    <select id="origin" class="form-control">
+                                        <option value="Mumbai">Mumbai</option>
+                                        <option value="Delhi">Delhi</option>
+                                        <option value="Bangalore">Bangalore</option>
+                                        <option value="Chennai">Chennai</option>
+                                        <option value="Hyderabad">Hyderabad</option>
+                                        <option value="Kolkata">Kolkata</option>
+                                        <option value="Pune">Pune</option>
+                                        <option value="Ahmedabad">Ahmedabad</option>
+                                        <option value="Jaipur">Jaipur</option>
+                                        <option value="Lucknow">Lucknow</option>
+                                        <option value="Chandigarh">Chandigarh</option>
+                                        <option value="Goa">Goa</option>
+                                        <option value="Kochi">Kochi</option>
+                                        <option value="Coimbatore">Coimbatore</option>
+                                        <option value="Nagpur">Nagpur</option>
+                                        <option value="Indore">Indore</option>
+                                        <option value="Bhopal">Bhopal</option>
+                                        <option value="Patna">Patna</option>
+                                        <option value="Ranchi">Ranchi</option>
+                                        <option value="Srinagar">Srinagar</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label><i class="fas fa-plane-arrival"></i> To</label>
+                                    <select id="destination" class="form-control">
+                                        <option value="Delhi">Delhi</option>
+                                        <option value="Mumbai">Mumbai</option>
+                                        <option value="Bangalore">Bangalore</option>
+                                        <option value="Chennai">Chennai</option>
+                                        <option value="Hyderabad">Hyderabad</option>
+                                        <option value="Kolkata">Kolkata</option>
+                                        <option value="Pune">Pune</option>
+                                        <option value="Ahmedabad">Ahmedabad</option>
+                                        <option value="Jaipur">Jaipur</option>
+                                        <option value="Lucknow">Lucknow</option>
+                                        <option value="Chandigarh">Chandigarh</option>
+                                        <option value="Goa">Goa</option>
+                                        <option value="Kochi">Kochi</option>
+                                        <option value="Coimbatore">Coimbatore</option>
+                                        <option value="Nagpur">Nagpur</option>
+                                        <option value="Indore">Indore</option>
+                                        <option value="Bhopal">Bhopal</option>
+                                        <option value="Patna">Patna</option>
+                                        <option value="Ranchi">Ranchi</option>
+                                        <option value="Srinagar">Srinagar</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label><i class="fas fa-calendar"></i> Travel Date</label>
+                                    <input type="date" id="travelDate" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label><i class="fas fa-couch"></i> Class</label>
+                                    <select id="searchClass" class="form-control">
+                                        <option value="Economy">Economy</option>
+                                        <option value="Business">Business</option>
+                                        <option value="First">First Class</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group trip-type">
+                                <label>Trip Type</label>
+                                <div class="radio-group">
+                                    <label class="radio-label">
+                                        <input type="radio" name="tripType" value="one_way" checked>
+                                        <span class="radio-custom"></span>
+                                        One Way
+                                    </label>
+                                    <label class="radio-label">
+                                        <input type="radio" name="tripType" value="round_trip">
+                                        <span class="radio-custom"></span>
+                                        Round Trip
+                                    </label>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-block">
+                                <i class="fas fa-search"></i> Search Flights
+                            </button>
+                        </form>
+                    </div>
+                </div>
+                <div class="card results-card">
+                    <div class="card-header">
+                        <h2>Available Flights</h2>
+                        <span class="badge" id="flightCount">0 flights</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="flights-list" id="flightsList">
+                            <div class="empty-state">
+                                <i class="fas fa-plane"></i>
+                                <p>Search for flights to see available options</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Total Cost Tab -->
+        <section class="tab-content" id="cost">
+            <div class="page-header">
+                <h1><i class="fas fa-calculator"></i> Calculate Total Cost</h1>
+                <p>Get fare breakdown before booking</p>
+            </div>
+            <div class="content-grid">
+                <div class="card cost-form-card">
+                    <div class="card-header">
+                        <h2>Fare Calculator</h2>
+                    </div>
+                    <div class="card-body">
+                        <form id="costForm">
+                            <div class="form-group">
+                                <label><i class="fas fa-plane"></i> Select Flight</label>
+                                <select id="costFlight" class="form-control">
+                                    <option value="">Select a flight</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label><i class="fas fa-users"></i> Number of Passengers</label>
+                                <input type="number" id="numPassengers" class="form-control" min="1" max="10" value="1">
+                            </div>
+                            <div class="form-group">
+                                <label><i class="fas fa-couch"></i> Class</label>
+                                <select id="costClass" class="form-control">
+                                    <option value="Economy">Economy</option>
+                                    <option value="Business">Business</option>
+                                    <option value="First">First Class</option>
+                                </select>
+                            </div>
+                            <div class="form-group trip-type">
+                                <label>Trip Type</label>
+                                <div class="radio-group">
+                                    <label class="radio-label">
+                                        <input type="radio" name="costTripType" value="one_way" checked>
+                                        <span class="radio-custom"></span>
+                                        One Way
+                                    </label>
+                                    <label class="radio-label">
+                                        <input type="radio" name="costTripType" value="round_trip">
+                                        <span class="radio-custom"></span>
+                                        Round Trip
+                                    </label>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-success btn-block">
+                                <i class="fas fa-calculator"></i> Calculate Cost
+                            </button>
+                        </form>
+                    </div>
+                </div>
+                <div class="card cost-display-card">
+                    <div class="card-header">
+                        <h2>Cost Breakdown</h2>
+                    </div>
+                    <div class="card-body">
+                        <div class="cost-breakdown">
+                            <div class="cost-item">
+                                <span class="cost-label">Base Fare</span>
+                                <span class="cost-value" id="baseFare">₹0</span>
+                            </div>
+                            <div class="cost-item">
+                                <span class="cost-label">Tax (10%)</span>
+                                <span class="cost-value" id="taxAmount">₹0</span>
+                            </div>
+                            <div class="cost-item">
+                                <span class="cost-label">Class Multiplier</span>
+                                <span class="cost-value" id="classMult">1x</span>
+                            </div>
+                            <div class="cost-item discount">
+                                <span class="cost-label">Discount (Round Trip)</span>
+                                <span class="cost-value" id="discountAmount">-₹0</span>
+                            </div>
+                            <div class="cost-divider"></div>
+                            <div class="cost-total">
+                                <span class="cost-label">TOTAL</span>
+                                <span class="cost-value" id="totalCost">₹0</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Book Ticket Tab -->
+        <section class="tab-content" id="booking">
+            <div class="page-header">
+                <h1><i class="fas fa-ticket-alt"></i> Book Your Ticket</h1>
+                <p>Complete your booking in simple steps</p>
+            </div>
+            <div class="content-grid">
+                <div class="card booking-form-card">
+                    <div class="card-header">
+                        <h2>Passenger Details</h2>
+                    </div>
+                    <div class="card-body">
+                        <form id="bookingForm">
+                            <div class="form-group">
+                                <label><i class="fas fa-plane"></i> Select Flight</label>
+                                <select id="bookingFlight" class="form-control">
+                                    <option value="SK101">SK101 - Mumbai to Delhi</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label><i class="fas fa-user"></i> Passenger Name</label>
+                                <input type="text" id="passengerName" class="form-control" placeholder="Enter your full name">
+                            </div>
+                            <div class="form-group">
+                                <label><i class="fas fa-envelope"></i> Email</label>
+                                <input type="email" id="passengerEmail" class="form-control" placeholder="your@email.com">
+                            </div>
+                            <div class="form-group">
+                                <label><i class="fas fa-phone"></i> Phone</label>
+                                <input type="tel" id="passengerPhone" class="form-control" placeholder="10-digit phone number">
+                            </div>
+                            <div class="form-group">
+                                <label><i class="fas fa-couch"></i> Class</label>
+                                <select id="bookingClass" class="form-control">
+                                    <option value="Economy">Economy</option>
+                                    <option value="Business">Business</option>
+                                    <option value="First">First Class</option>
+                                </select>
+                            </div>
+                            <div class="form-divider">
+                                <span>Payment Details</span>
+                            </div>
+                            <div class="form-group">
+                                <label><i class="fas fa-credit-card"></i> Payment Method</label>
+                                <select id="paymentMethod" class="form-control">
+                                    <option value="Credit Card">Credit Card</option>
+                                    <option value="Debit Card">Debit Card</option>
+                                    <option value="UPI">UPI</option>
+                                    <option value="Net Banking">Net Banking</option>
+                                </select>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label><i class="fas fa-credit-card"></i> Card Number</label>
+                                    <input type="text" id="cardNumber" class="form-control" placeholder="1234 5678 9012 3456" maxlength="19">
+                                </div>
+                                <div class="form-group">
+                                    <label><i class="fas fa-lock"></i> CVV</label>
+                                    <input type="password" id="cvv" class="form-control" placeholder="123" maxlength="4">
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-block">
+                                <i class="fas fa-ticket-alt"></i> Book Now
+                            </button>
+                        </form>
+                    </div>
+                </div>
+                <div class="card ticket-preview-card">
+                    <div class="card-header">
+                        <h2>Booking Summary</h2>
+                    </div>
+                    <div class="card-body">
+                        <div class="ticket-preview" id="ticketPreview">
+                            <div class="ticket-airline">
+                                <i class="fas fa-plane-departure"></i>
+                                <span>SKYBOOK AIRLINES</span>
+                            </div>
+                            <div class="ticket-pnr">
+                                <span class="ticket-label">PNR</span>
+                                <span class="ticket-value" id="previewPnr">---</span>
+                            </div>
+                            <div class="ticket-details">
+                                <div class="ticket-row">
+                                    <span class="ticket-label">Passenger</span>
+                                    <span class="ticket-value" id="previewName">---</span>
+                                </div>
+                                <div class="ticket-row">
+                                    <span class="ticket-label">Flight</span>
+                                    <span class="ticket-value" id="previewFlight">---</span>
+                                </div>
+                                <div class="ticket-row">
+                                    <span class="ticket-label">Route</span>
+                                    <span class="ticket-value" id="previewRoute">---</span>
+                                </div>
+                                <div class="ticket-row">
+                                    <span class="ticket-label">Class</span>
+                                    <span class="ticket-value" id="previewClass">---</span>
+                                </div>
+                                <div class="ticket-row">
+                                    <span class="ticket-label">Total</span>
+                                    <span class="ticket-value" id="previewTotal">---</span>
+                                </div>
+                            </div>
+                            <div class="ticket-status">
+                                <span class="status-badge" id="previewStatus">Pending</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seat Allocation Tab -->
+        <section class="tab-content" id="seat">
+            <div class="page-header">
+                <h1><i class="fas fa-chair"></i> Seat Allocation</h1>
+                <p>Select your preferred seat</p>
+            </div>
+            <div class="content-grid">
+                <div class="card seat-form-card">
+                    <div class="card-header">
+                        <h2>Retrieve Booking</h2>
+                    </div>
+                    <div class="card-body">
+                        <form id="seatRetrieveForm">
+                            <div class="form-group">
+                                <label><i class="fas fa-qrcode"></i> Enter PNR</label>
+                                <input type="text" id="seatPnr" class="form-control" placeholder="Enter your PNR">
+                            </div>
+                            <button type="button" class="btn btn-info btn-block" onclick="retrieveBooking()">
+                                <i class="fas fa-search"></i> Retrieve Booking
+                            </button>
+                            <div class="divider-text">
+                                <span>OR</span>
+                            </div>
+                            <div class="form-group">
+                                <label><i class="fas fa-user"></i> Enter User ID</label>
+                                <input type="text" id="seatUserId" class="form-control" placeholder="Enter your User ID">
+                            </div>
+                            <button type="button" class="btn btn-info btn-block" onclick="retrieveByUserId()">
+                                <i class="fas fa-search"></i> Find by User ID
+                            </button>
+                        </form>
+                        <div class="booking-info-box" id="seatBookingInfo">
+                            <i class="fas fa-info-circle"></i>
+                            <span>No booking loaded</span>
+                        </div>
+                        <button class="btn btn-success btn-block" id="generateBoardingBtn" onclick="generateBoardingPass()" disabled>
+                            <i class="fas fa-passport"></i> Generate Boarding Pass
+                        </button>
+                    </div>
+                </div>
+                <div class="card seat-map-card">
+                    <div class="card-header">
+                        <h2>Select Your Seat</h2>
+                        <span class="seat-counter" id="selectedSeatDisplay">No seat selected</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="aircraft-container">
+                            <div class="aircraft-nose">
+                                <i class="fas fa-plane"></i>
+                                <span>FRONT OF AIRCRAFT</span>
+                            </div>
+                            <div class="seat-grid" id="seatGrid">
+                                <!-- Seats will be generated by JavaScript -->
+                            </div>
+                            <div class="aisle-indicator">
+                                <span>AISLE</span>
+                            </div>
+                        </div>
+                        <div class="seat-legend">
+                            <div class="legend-item">
+                                <span class="legend-color available"></span>
+                                <span>Available</span>
+                            </div>
+                            <div class="legend-item">
+                                <span class="legend-color selected"></span>
+                                <span>Selected</span>
+                            </div>
+                            <div class="legend-item">
+                                <span class="legend-color occupied"></span>
+                                <span>Occupied</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Cancellation Tab -->
+        <section class="tab-content" id="cancel">
+            <div class="page-header">
+                <h1><i class="fas fa-times-circle"></i> Cancel Booking</h1>
+                <p>Cancel your booking and get refund</p>
+            </div>
+            <div class="content-grid">
+                <div class="card cancel-form-card">
+                    <div class="card-header">
+                        <h2>Cancel Your Booking</h2>
+                    </div>
+                    <div class="card-body">
+                        <form id="cancelForm">
+                            <div class="form-group">
+                                <label><i class="fas fa-qrcode"></i> Enter PNR</label>
+                                <input type="text" id="cancelPnr" class="form-control" placeholder="Enter your PNR">
+                            </div>
+                            <button type="button" class="btn btn-warning btn-block" onclick="checkBooking()">
+                                <i class="fas fa-search"></i> Check Booking
+                            </button>
+                        </form>
+                        <div class="booking-info-box" id="cancelBookingInfo">
+                            <i class="fas fa-info-circle"></i>
+                            <span>Enter PNR to view booking details</span>
+                        </div>
+                        <div class="refund-display" id="refundDisplay">
+                            <span class="refund-label">Refund Amount</span>
+                            <span class="refund-value" id="refundAmount">₹0</span>
+                        </div>
+                        <button class="btn btn-danger btn-block" id="cancelBookingBtn" onclick="cancelBooking()" disabled>
+                            <i class="fas fa-times-circle"></i> Cancel Booking
+                        </button>
+                    </div>
+                </div>
+                <div class="card policy-card">
+                    <div class="card-header">
+                        <h2>Refund Policy</h2>
+                    </div>
+                    <div class="card-body">
+                        <div class="policy-list">
+                            <div class="policy-item">
+                                <div class="policy-time">
+                                    <i class="fas fa-clock"></i>
+                                    <span>24+ hours before departure</span>
+                                </div>
+                                <div class="policy-refund high">
+                                    <span>80% Refund</span>
+                                </div>
+                            </div>
+                            <div class="policy-item">
+                                <div class="policy-time">
+                                    <i class="fas fa-clock"></i>
+                                    <span>12-24 hours before departure</span>
+                                </div>
+                                <div class="policy-refund medium">
+                                    <span>50% Refund</span>
+                                </div>
+                            </div>
+                            <div class="policy-item">
+                                <div class="policy-time">
+                                    <i class="fas fa-clock"></i>
+                                    <span>Less than 12 hours</span>
+                                </div>
+                                <div class="policy-refund low">
+                                    <span>No Refund</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Boarding Pass Modal -->
+    <div class="modal" id="boardingPassModal">
+        <div class="modal-content boarding-pass">
+            <button class="modal-close" onclick="closeModal()">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="boarding-pass-container">
+                <div class="bp-header">
+                    <div class="bp-logo">
+                        <i class="fas fa-plane-departure"></i>
+                    </div>
+                    <div class="bp-airline">
+                        <h2>SKYBOOK AIRLINES</h2>
+                        <span>BOARDING PASS</span>
+                    </div>
+                </div>
+                <div class="bp-pnr">
+                    <span class="bp-label">PNR</span>
+                    <span class="bp-value" id="bpPnr">---</span>
+                </div>
+                <div class="bp-details">
+                    <div class="bp-row">
+                        <div class="bp-field">
+                            <span class="bp-label">Passenger Name</span>
+                            <span class="bp-value" id="bpName">---</span>
+                        </div>
+                    </div>
+                    <div class="bp-row">
+                        <div class="bp-field">
+                            <span class="bp-label">Flight</span>
+                            <span class="bp-value" id="bpFlight">---</span>
+                        </div>
+                        <div class="bp-field">
+                            <span class="bp-label">Date</span>
+                            <span class="bp-value" id="bpDate">---</span>
+                        </div>
+                    </div>
+                    <div class="bp-row">
+                        <div class="bp-field">
+                            <span class="bp-label">From</span>
+                            <span class="bp-value" id="bpFrom">---</span>
+                        </div>
+                        <div class="bp-field">
+                            <span class="bp-label">To</span>
+                            <span class="bp-value" id="bpTo">---</span>
+                        </div>
+                    </div>
+                    <div class="bp-separator"></div>
+                    <div class="bp-row bp-highlight">
+                        <div class="bp-field">
+                            <span class="bp-label">SEAT</span>
+                            <span class="bp-value" id="bpSeat">---</span>
+                        </div>
+                        <div class="bp-field">
+                            <span class="bp-label">GATE</span>
+                            <span class="bp-value" id="bpGate">---</span>
+                        </div>
+                        <div class="bp-field">
+                            <span class="bp-label">CLASS</span>
+                            <span class="bp-value" id="bpClass">---</span>
+                        </div>
+                    </div>
+                    <div class="bp-row">
+                        <div class="bp-field">
+                            <span class="bp-label">Aircraft</span>
+                            <span class="bp-value" id="bpAircraft">---</span>
+                        </div>
+                        <div class="bp-field">
+                            <span class="bp-label">Boarding Time</span>
+                            <span class="bp-value" id="bpTime">---</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="bp-footer">
+                    <span>Have a pleasant journey!</span>
+                    <i class="fas fa-plane"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success Modal -->
+    <div class="modal" id="successModal">
+        <div class="modal-content success-modal">
+            <button class="modal-close" onclick="closeSuccessModal()">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="success-content">
+                <div class="success-icon">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <h2 id="successTitle">Success!</h2>
+                <p id="successMessage"></p>
+                <div class="success-details" id="successDetails"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Error Modal -->
+    <div class="modal" id="errorModal">
+        <div class="modal-content error-modal">
+            <button class="modal-close" onclick="closeErrorModal()">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="error-content">
+                <div class="error-icon">
+                    <i class="fas fa-exclamation-circle"></i>
+                </div>
+                <h2>Error!</h2>
+                <p id="errorMessage"></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Login/Register Modal -->
+    <div class="modal" id="authModal">
+        <div class="modal-content auth-modal">
+            <button class="modal-close" onclick="closeAuthModal()">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="auth-container">
+                <div class="auth-tabs">
+                    <button class="auth-tab active" onclick="switchAuthTab('login')">Login</button>
+                    <button class="auth-tab" onclick="switchAuthTab('register')">Register</button>
+                </div>
+                
+                <!-- Login Form -->
+                <form id="loginForm" onsubmit="handleLogin(event)">
+                    <div class="form-group">
+                        <label><i class="fas fa-envelope"></i> Email</label>
+                        <input type="email" id="loginEmail" class="form-control" placeholder="your@email.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-lock"></i> Password</label>
+                        <input type="password" id="loginPassword" class="form-control" placeholder="Enter password" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">
+                        <i class="fas fa-sign-in-alt"></i> Login
+                    </button>
+                </form>
+                
+                <!-- Register Form -->
+                <form id="registerForm" style="display: none;" onsubmit="handleRegister(event)">
+                    <div class="form-group">
+                        <label><i class="fas fa-user"></i> Full Name</label>
+                        <input type="text" id="regName" class="form-control" placeholder="Enter your full name" required>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-envelope"></i> Email</label>
+                        <input type="email" id="regEmail" class="form-control" placeholder="your@email.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-phone"></i> Phone</label>
+                        <input type="tel" id="regPhone" class="form-control" placeholder="10-digit phone number" required>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-lock"></i> Password</label>
+                        <input type="password" id="regPassword" class="form-control" placeholder="Create password" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">
+                        <i class="fas fa-user-plus"></i> Register
+                    </button>
+                </form>
+                
+                <div class="auth-note">
+                    <p><i class="fas fa-info-circle"></i> Login required to book tickets</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const activeTab = "{{ active_tab }}" || "search";
+    </script>
+    <script src="/static/app.js"></script>
+</body>
+</html>

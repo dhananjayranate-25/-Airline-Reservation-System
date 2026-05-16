@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkyBook - Premium Airline Reservation</title>
+    <link rel="stylesheet" href="/static/home.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav-container">
+            <div class="nav-brand">
+                <div class="logo">
+                    <i class="fas fa-paper-plane"></i>
+                </div>
+                <div class="brand-text">
+                    <span class="brand-name">SkyBook</span>
+                    <span class="brand-tagline">Premium Airlines</span>
+                </div>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#why-choose">Why Choose</a></li>
+                <li><a href="#testimonials">Reviews</a></li>
+                <li><a href="#" onclick="showSchedule()">SkyBook Schedule</a></li>
+                <li><a href="#" class="admin-link" id="homeAdminLink" style="display:none;" onclick="goToAdmin()">Admin Panel</a></li>
+                <li><a href="#" class="btn-nav" onclick="goToBooking()">Book Now</a></li>
+            </ul>
+            <div class="auth-buttons">
+                <button class="login-btn" id="homeLoginBtn" onclick="showLoginModal()">
+                    <i class="fas fa-sign-in-alt"></i> Login
+                </button>
+                <div class="user-info" id="homeUserInfo" style="display: none;">
+                    <div class="user-avatar">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <span class="user-name" id="homeUserName">User</span>
+                    <button class="logout-btn" onclick="logout()">
+                        <i class="fas fa-sign-out-alt"></i> Logout
+                    </button>
+                </div>
+            </div>
+            <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+                <i class="fas fa-bars"></i>
+            </button>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-background">
+            <div class="hero-overlay"></div>
+            <div class="hero-particles">
+                <span></span><span></span><span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="hero-content">
+            <div class="hero-text">
+                <span class="hero-badge"><i class="fas fa-star"></i> #1 Airline Booking Platform</span>
+                <h1>Experience the <span class="highlight">Skies</span><br>Like Never Before</h1>
+                <p>Book your dream flights with seamless experience, best prices, and premium service. Your journey begins here.</p>
+                <div class="hero-buttons">
+                    <button class="btn-primary-lg" onclick="goToBooking()">
+                        <i class="fas fa-ticket-alt"></i> Book Your Ticket
+                    </button>
+                    <button class="btn-secondary-lg" onclick="scrollToSection('features')">
+                        <i class="fas fa-play"></i> Explore More
+                    </button>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat">
+                        <span class="stat-number">50K+</span>
+                        <span class="stat-label">Happy Customers</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">100+</span>
+                        <span class="stat-label">Destinations</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">500+</span>
+                        <span class="stat-label">Daily Flights</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">4.9</span>
+                        <span class="stat-label">User Rating</span>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-image">
+                <div class="airplane-animation">
+                    <div class="airplane">
+                        <i class="fas fa-plane"></i>
+                    </div>
+                    <div class="clouds">
+                        <span class="cloud" style="--i:1"></span>
+                        <span class="cloud" style="--i:2"></span>
+                        <span class="cloud" style="--i:3"></span>
+                    </div>
+                </div>
+                <div class="floating-cards">
+                    <div class="float-card card-1">
+                        <i class="fas fa-shield-alt"></i>
+                        <span>Safe & Secure</span>
+                    </div>
+                    <div class="float-card card-2">
+                        <i class="fas fa-clock"></i>
+                        <span>24/7 Support</span>
+                    </div>
+                    <div class="float-card card-3">
+                        <i class="fas fa-tag"></i>
+                        <span>Best Prices</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="section-header">
+            <span class="section-tag">Features</span>
+            <h2>Everything You Need</h2>
+            <p>Powerful features to make your travel planning effortless</p>
+        </div>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-search"></i>
+                </div>
+                <h3>Smart Flight Search</h3>
+                <p>Find the best flights with our intelligent search algorithm. Filter by price, time, Airlines, and more.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-chair"></i>
+                </div>
+                <h3>Interactive Seat Map</h3>
+                <p>Choose your perfect seat with our interactive seat selection. View seat layout before booking.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-calculator"></i>
+                </div>
+                <h3>Transparent Pricing</h3>
+                <p>No hidden fees. View complete cost breakdown with taxes and discounts before payment.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-mobile-alt"></i>
+                </div>
+                <h3>Instant Booking</h3>
+                <p>Quick and easy booking process. Get your e-ticket and boarding pass instantly via email.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-passport"></i>
+                </div>
+                <h3>Digital Boarding Pass</h3>
+                <p>Receive your boarding pass digitally. Skip the queue and fly hassle-free.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-undo"></i>
+                </div>
+                <h3>Easy Cancellation</h3>
+                <p>Cancel your booking anytime. Get instant refund notification with transparent policy.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Section -->
+    <section class="why-choose" id="why-choose">
+        <div class="why-choose-content">
+            <div class="why-choose-images">
+                <div class="image-stack">
+                    <div class="img-card img-1">
+                        <img src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=400&h=500&fit=crop" alt="Luxury Flight">
+                        <div class="img-overlay"></div>
+                    </div>
+                    <div class="img-card img-2">
+                        <img src="https://images.unsplash.com/photo-1569154941061-e231b4725ef1?w=400&h=300&fit=crop" alt="Comfort Seating">
+                        <div class="img-overlay"></div>
+                    </div>
+                    <div class="img-card img-3">
+                        <img src="https://images.unsplash.com/photo-1474302770737-173ee21bab63?w=400&h=250&fit=crop" alt="Airport View">
+                        <div class="img-overlay"></div>
+                    </div>
+                </div>
+                <div class="experience-badge">
+                    <span class="exp-number">15+</span>
+                    <span class="exp-text">Years of Excellence</span>
+                </div>
+            </div>
+            <div class="why-choose-text">
+                <span class="section-tag">Why SkyBook</span>
+                <h2>Travel with Confidence</h2>
+                <p>We pride ourselves on providing the best booking experience with unmatched benefits that set us apart from the rest.</p>
+                <ul class="benefits-list">
+                    <li>
+                        <div class="benefit-icon"><i class="fas fa-check-circle"></i></div>
+                        <div>
+                            <h4>Secure Payments</h4>
+                            <p>Bank-level encryption ensures your payment information is always safe</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="benefit-icon"><i class="fas fa-check-circle"></i></div>
+                        <div>
+                            <h4>Best Price Guarantee</h4>
+                            <p>We match any lower price you find elsewhere</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="benefit-icon"><i class="fas fa-check-circle"></i></div>
+                        <div>
+                            <h4>Instant Confirmations</h4>
+                            <p>Get immediate booking confirmation via email and SMS</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="benefit-icon"><i class="fas fa-check-circle"></i></div>
+                        <div>
+                            <h4>24/7 Customer Support</h4>
+                            <p>Our dedicated team is always ready to help you</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="benefit-icon"><i class="fas fa-check-circle"></i></div>
+                        <div>
+                            <h4>Flexible Changes</h4>
+                            <p>Modify your booking easily with minimal charges</p>
+                        </div>
+                    </li>
+                </ul>
+                <button class="btn-primary-lg" onclick="goToBooking()">
+                    <i class="fas fa-ticket-alt"></i> Start Booking Now
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials" id="testimonials">
+        <div class="section-header">
+            <span class="section-tag">Testimonials</span>
+            <h2>What Our Customers Say</h2>
+            <p>Join thousands of happy travelers who trust SkyBook</p>
+        </div>
+        <div class="testimonials-grid">
+            <div class="testimonial-card">
+                <div class="testimonial-header">
+                    <div class="customer-img">
+                        <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Customer">
+                    </div>
+                    <div>
+                        <h4>Sarah Johnson</h4>
+                        <span>Business Traveler</span>
+                    </div>
+                    <div class="rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+                <p>"The best flight booking experience I've ever had! The seat selection feature is amazing. Highly recommended!"</p>
+                <div class="testimonial-footer">
+                    <span><i class="fas fa-plane-departure"></i> Mumbai → Delhi</span>
+                </div>
+            </div>
+            <div class="testimonial-card featured">
+                <div class="featured-badge">Most Loved</div>
+                <div class="testimonial-header">
+                    <div class="customer-img">
+                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Customer">
+                    </div>
+                    <div>
+                        <h4>Michael Chen</h4>
+                        <span>Frequent Flyer</span>
+                    </div>
+                    <div class="rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+                <p>"I've been using SkyBook for all my business trips. The transparent pricing and easy cancellation policy are fantastic!"</p>
+                <div class="testimonial-footer">
+                    <span><i class="fas fa-plane-departure"></i> Bangalore → Chennai</span>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <div class="testimonial-header">
+                    <div class="customer-img">
+                        <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Customer">
+                    </div>
+                    <div>
+                        <h4>Priya Sharma</h4>
+                        <span>Family Traveler</span>
+                    </div>
+                    <div class="rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+                <p>"Booked our entire family's vacation through SkyBook. The interactive seat map helped us sit together. Great service!"</p>
+                <div class="testimonial-footer">
+                    <span><i class="fas fa-plane-departure"></i> Delhi → Mumbai</span>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <div class="testimonial-header">
+                    <div class="customer-img">
+                        <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="Customer">
+                    </div>
+                    <div>
+                        <h4>Arjun Patel</h4>
+                        <span>Adventure Seeker</span>
+                    </div>
+                    <div class="rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                </div>
+                <p>"The booking process is super fast and the digital boarding pass worked perfectly. Will definitely use again!"</p>
+                <div class="testimonial-footer">
+                    <span><i class="fas fa-plane-departure"></i> Mumbai → Bangalore</span>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <div class="testimonial-header">
+                    <div class="customer-img">
+                        <img src="https://randomuser.me/api/portraits/women/90.jpg" alt="Customer">
+                    </div>
+                    <div>
+                        <h4>Emma Wilson</h4>
+                        <span>Solo Traveler</span>
+                    </div>
+                    <div class="rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+                <p>"As a solo traveler, I appreciate the 24/7 support. They helped me change my flight when my plans changed."</p>
+                <div class="testimonial-footer">
+                    <span><i class="fas fa-plane-departure"></i> Chennai → Delhi</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Flight Schedule Section -->
+    <section class="flight-schedule" id="schedule">
+        <div class="section-header">
+            <span class="section-tag">Flight Schedule</span>
+            <h2>SkyBook Flight Timings</h2>
+            <p>View all available flights and their schedules</p>
+        </div>
+        <div class="schedule-filters">
+            <select id="scheduleOrigin" class="schedule-filter" onchange="loadSchedule()">
+                <option value="">All Origins</option>
+                <option value="Mumbai">Mumbai</option>
+                <option value="Delhi">Delhi</option>
+                <option value="Bangalore">Bangalore</option>
+                <option value="Chennai">Chennai</option>
+                <option value="Hyderabad">Hyderabad</option>
+                <option value="Kolkata">Kolkata</option>
+                <option value="Pune">Pune</option>
+                <option value="Ahmedabad">Ahmedabad</option>
+                <option value="Jaipur">Jaipur</option>
+                <option value="Lucknow">Lucknow</option>
+                <option value="Chandigarh">Chandigarh</option>
+                <option value="Goa">Goa</option>
+                <option value="Kochi">Kochi</option>
+                <option value="Coimbatore">Coimbatore</option>
+                <option value="Nagpur">Nagpur</option>
+                <option value="Indore">Indore</option>
+                <option value="Bhopal">Bhopal</option>
+                <option value="Patna">Patna</option>
+                <option value="Ranchi">Ranchi</option>
+                <option value="Srinagar">Srinagar</option>
+            </select>
+            <select id="scheduleDest" class="schedule-filter" onchange="loadSchedule()">
+                <option value="">All Destinations</option>
+                <option value="Mumbai">Mumbai</option>
+                <option value="Delhi">Delhi</option>
+                <option value="Bangalore">Bangalore</option>
+                <option value="Chennai">Chennai</option>
+                <option value="Hyderabad">Hyderabad</option>
+                <option value="Kolkata">Kolkata</option>
+                <option value="Pune">Pune</option>
+                <option value="Ahmedabad">Ahmedabad</option>
+                <option value="Jaipur">Jaipur</option>
+                <option value="Lucknow">Lucknow</option>
+                <option value="Chandigarh">Chandigarh</option>
+                <option value="Goa">Goa</option>
+                <option value="Kochi">Kochi</option>
+                <option value="Coimbatore">Coimbatore</option>
+                <option value="Nagpur">Nagpur</option>
+                <option value="Indore">Indore</option>
+                <option value="Bhopal">Bhopal</option>
+                <option value="Patna">Patna</option>
+                <option value="Ranchi">Ranchi</option>
+                <option value="Srinagar">Srinagar</option>
+            </select>
+        </div>
+        <div class="schedule-table-container">
+            <table class="schedule-table">
+                <thead>
+                    <tr>
+                        <th>Flight</th>
+                        <th>From</th>
+                        <th>To</th>
+                        <th>Departure</th>
+                        <th>Arrival</th>
+                        <th>Duration</th>
+                        <th>Price</th>
+                        <th>Seats</th>
+                    </tr>
+                </thead>
+                <tbody id="scheduleBody">
+                    <tr><td colspan="8" style="text-align:center; padding:40px;">Loading flights...</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="cta-content">
+            <h2>Ready to Take Flight?</h2>
+            <p>Book your next adventure with SkyBook and experience the difference</p>
+            <button class="btn-primary-lg" onclick="goToBooking()">
+                <i class="fas fa-ticket-alt"></i> Book Your Ticket Now
+            </button>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-brand">
+                <div class="logo">
+                    <i class="fas fa-paper-plane"></i>
+                </div>
+                <h3>SkyBook</h3>
+                <p>Your trusted partner for seamless flight booking experiences.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="#" onclick="goToHome()">Home</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#why-choose">Why Choose</a></li>
+                    <li><a href="#testimonials">Reviews</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Services</h4>
+                <ul>
+                    <li><a href="#" onclick="goToSearch()">Search Flights</a></li>
+                    <li><a href="#" onclick="goToCost()">Price Calculator</a></li>
+                    <li><a href="#" onclick="goToBooking()">Book Ticket</a></li>
+                    <li><a href="#" onclick="goToSeat()">Seat Selection</a></li>
+                </ul>
+            </div>
+            <div class="footer-contact">
+                <h4>Contact Us</h4>
+                <ul>
+                    <li><i class="fas fa-envelope"></i> support@skybook.com</li>
+                    <li><i class="fas fa-phone"></i> +91 1800 123 4567</li>
+                    <li><i class="fas fa-map-marker-alt"></i> Mumbai, India</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 SkyBook Airlines. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Login/Register Modal -->
+    <div class="modal" id="authModal">
+        <div class="modal-content auth-modal">
+            <button class="modal-close" onclick="closeAuthModal()">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="auth-container">
+                <div class="auth-tabs">
+                    <button class="auth-tab active" onclick="switchAuthTab('login')">Login</button>
+                    <button class="auth-tab" onclick="switchAuthTab('register')">Register</button>
+                </div>
+                
+                <!-- Login Form -->
+                <form id="loginForm" onsubmit="handleLogin(event)">
+                    <div class="form-group">
+                        <label><i class="fas fa-envelope"></i> Email</label>
+                        <input type="email" id="loginEmail" class="form-control" placeholder="your@email.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-lock"></i> Password</label>
+                        <input type="password" id="loginPassword" class="form-control" placeholder="Enter password" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">
+                        <i class="fas fa-sign-in-alt"></i> Login
+                    </button>
+                </form>
+                
+                <!-- Register Form -->
+                <form id="registerForm" style="display: none;" onsubmit="handleRegister(event)">
+                    <div class="form-group">
+                        <label><i class="fas fa-user"></i> Full Name</label>
+                        <input type="text" id="regName" class="form-control" placeholder="Enter your full name" required>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-envelope"></i> Email</label>
+                        <input type="email" id="regEmail" class="form-control" placeholder="your@email.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-phone"></i> Phone</label>
+                        <input type="tel" id="regPhone" class="form-control" placeholder="10-digit phone number" required>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-lock"></i> Password</label>
+                        <input type="password" id="regPassword" class="form-control" placeholder="Create password" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">
+                        <i class="fas fa-user-plus"></i> Register
+                    </button>
+                </form>
+                
+                <div class="auth-note">
+                    <p><i class="fas fa-info-circle"></i> Login required to book tickets</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/static/home.js"></script>
+</body>
+</html>
